@@ -4,8 +4,8 @@ services:
     image: postgres:14.19-trixie
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-admin}
-      - POSTGRES_PASSWORD=${POSTGRES_USER:-T4k8_40By3£3MGj}
-      - POSTGRES_DB=${POSTGRES_USER:-test_db}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-T4k8_40By33MGj}
+      - POSTGRES_DB=${POSTGRES_DB:-test_db}
     ports:
       - "5432:5432"
     volumes:
