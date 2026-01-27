@@ -18,6 +18,6 @@ class SampleUserController (
     @PostMapping
     fun createUser(@RequestBody @Valid dto: CreateUserDTO): ResponseEntity<UserCreatedDTO> {
         val response = userService.create(dto)
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(response)
     }
 }
