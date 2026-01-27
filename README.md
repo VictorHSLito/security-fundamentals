@@ -43,3 +43,22 @@ esse meu `UserDetailsService`, para isso criei as seguintes classes:
 - `APIController`: Possui apenas um endpoint público que indica se a API está ativa ou não
 - `BasiAuthController`: É o controller que terá o endpoint responsável para autenticar o usuário
 - `SampleUserController`: É o controller utilizado para criar novos usuários na base de dados
+
+# Testando o Basic Auth
+
+Tente fazer uma requisição do tipo POST no endpoint `/basic/login`, por se tratar de uma rota que precisa de autenticação, você
+provalvemente receberá a resposta 401. 
+
+Primeiro de tudo, crie um novo usuário qualquer no banco de dados através do `SampleUserController`,
+abra o código da entity `SampleUser` e perceba que ela implementa a interface `UserDetails` conforme comentei anteriormente,
+agora abra o código da classe `CustomUserDetailsService` e perceba que ela implementa a interface `UserDetailsService`
+
+Dentro da classe `SecurityConfig` eu crio uma nova instância do `DaoAuthenticationProvider` digo para ele utilizar o meu
+`CustomUserDetailsService` juntamente com o `PasswordEncoder`.
+
+Abra a classe do `DaoAuthenticationProvider` e coloque um breakpoint no método `retrieveUser()`. No mesmo endpoint `/basic/login`
+tente novamente fazer uma requisição POST, porém agora utilizando o Basic Auth como forma de autenticação. Coloque o email e a senha
+que você utilizou para cadastrar o usuário no banco de dados.
+
+Agora observe a mágica do Spring Security acontecer, se você passar uma credencial errada, receberá um 401, porém se tudo estiver
+correto, deverá receber um 200.
