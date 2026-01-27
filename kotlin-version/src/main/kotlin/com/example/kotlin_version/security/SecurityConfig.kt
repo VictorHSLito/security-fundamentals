@@ -22,6 +22,7 @@ class SecurityConfig {
                     .requestMatchers("/user").permitAll()
                     .anyRequest().authenticated()
             }
+            .httpBasic {  }
         return http.build()
     }
 

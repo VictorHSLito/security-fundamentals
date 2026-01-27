@@ -1,20 +1,30 @@
 package com.example.kotlin_version.entity
 
 import jakarta.persistence.*
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "tb_user")
-data class SampleUser(
+class SampleUser(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long? = null,
+    private val id: Long? = null,
 
     @Column(nullable = false)
-    val username: String,
+    private val username: String,
 
     @Column(unique = true, nullable = false)
-    val email: String,
+    private val email: String,
 
     @Column(nullable = false)
-    val password: String
-) {}
+    private val password: String
+): UserDetails {
+    override fun getAuthorities(): Collection<GrantedAuthority> =
+        listOf(SimpleGrantedAuthority("USER"))
+
+    override fun getPassword(): String = password
+
+    override fun getUsername(): String = username
+}
