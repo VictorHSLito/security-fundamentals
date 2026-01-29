@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain basicAuthFilterChain(HttpSecurity http) {
         http
-                .securityMatcher("/api/**", "/user/**")
+                .securityMatcher("/api/**", "/user/**", "/basic/**")
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/user").permitAll()
